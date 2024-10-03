@@ -15,9 +15,7 @@ public class Ui {
     private static final int LINE_LENGTH = 50;
 
     private static final String GREETING = "Hello! I'm...";
-    private static final String LOGO ="""
-        BUFFBUDDY
-        """;
+    private static final String LOGO = "BUFFBUDDY";
     private static final String PROMPT = "What can I do for you?";
 
     private static final String FAREWELL ="Bye. Hope to see you again soon!";
