@@ -30,8 +30,8 @@ public class Ui {
 
     private static final String FAREWELL ="Bye. Hope to see you again soon!";
 
-    private Scanner in;
-    private PrintStream out;
+    private final Scanner in;
+    private final PrintStream out;
 
     /**
      * Constructs an Ui object, initializing the input and output streams.

@@ -3,8 +3,8 @@ package programme;
 import java.util.ArrayList;
 
 public class Day {
-    private String name;
-    private ArrayList<Exercise> exercises;
+    private final String name;
+    private final ArrayList<Exercise> exercises;
 
     public Day(String name, ArrayList<Exercise> exercises) {
         this.name = name;

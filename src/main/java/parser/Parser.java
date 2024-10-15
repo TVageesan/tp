@@ -15,7 +15,7 @@ import static parser.ParserUtils.parseIndex;
 
 
 public class Parser {
-    private ProgammeParser progParser;
+    private final ProgammeParser progParser;
 
     public Parser(){
         this.progParser = new ProgammeParser();
@@ -31,13 +31,13 @@ public class Parser {
             argumentString = inputArguments[1];
         }
 
-        switch (commandString) {
-        case ProgammeParser.COMMAND_WORD: return progParser.parse(argumentString);
-        case LogCommand.COMMAND_WORD: return prepareLogCommand(argumentString);
-        case HistoryCommand.COMMAND_WORD: return new HistoryCommand();
-        case ExitCommand.COMMAND_WORD: return new ExitCommand();
-        default: return new InvalidCommand();
-        }
+        return switch (commandString) {
+        case ProgammeParser.COMMAND_WORD -> progParser.parse(argumentString);
+        case LogCommand.COMMAND_WORD -> prepareLogCommand(argumentString);
+        case HistoryCommand.COMMAND_WORD -> new HistoryCommand();
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        default -> new InvalidCommand();
+        };
     }
 
     private Command prepareLogCommand(String argumentString){

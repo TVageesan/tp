@@ -7,10 +7,11 @@ import core.History;
 
 public class StartCommand extends Command {
     public static final String COMMAND_WORD = "start";
-    private int progId;
+    private final int progId;
 
     public StartCommand(int progId) {
-        this.progId = progId; }
+        this.progId = progId;
+    }
 
     @Override
     public void execute(Ui ui, ProgrammeList pList, History history){

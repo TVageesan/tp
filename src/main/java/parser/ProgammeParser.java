@@ -31,15 +31,14 @@ public class ProgammeParser {
             arguments = inputArguments[1];
         }
 
-        switch (subCommandString) {
-        case CreateCommand.COMMAND_WORD: return prepareCreateCommand(arguments);
-        case ViewCommand.COMMAND_WORD: return prepareViewCommand(arguments);
-        case ListCommand.COMMAND_WORD: return new ListCommand();
-        case EditCommand.COMMAND_WORD: return prepareEditCommand(arguments);
-        case StartCommand.COMMAND_WORD: return prepareStartCommand(arguments);
-        case DeleteCommand.COMMAND_WORD: return prepareDeleteCommand(arguments);
-        default: return new InvalidCommand();
-        }
+        return switch (subCommandString) {
+        case CreateCommand.COMMAND_WORD -> prepareCreateCommand(arguments);
+        case ViewCommand.COMMAND_WORD -> prepareViewCommand(arguments);
+        case ListCommand.COMMAND_WORD -> new ListCommand();
+        case EditCommand.COMMAND_WORD -> prepareEditCommand(arguments);
+        case StartCommand.COMMAND_WORD -> prepareStartCommand(arguments);
+        default -> new InvalidCommand();
+        };
     }
 
     private Command prepareCreateCommand(String argumentString) {
@@ -98,6 +97,10 @@ public class ProgammeParser {
                 editCommand.addDelete(progIndex, dayIndex, exerciseIndex);
                 break;
 
+            case "xd":
+                editCommand.addDeleteDay(progIndex, dayIndex);
+                break;
+
             case "u": // Update exercise (parse the value string to create an Exercise)
                 String[] updateParts = value.split(" ", 2);
                 exerciseIndex = parseIndex(updateParts[0]);
@@ -108,6 +111,11 @@ public class ProgammeParser {
             case "a": // Add new exercise (parse the value string to create an Exercise)
                 Exercise created = parseExercise(value);
                 editCommand.addCreate(progIndex, dayIndex, created);
+                break;
+
+            case "ad":
+                Day day = parseDay(value);
+                editCommand.addCreateDay(progIndex, day);
                 break;
 
             default:
@@ -158,6 +166,7 @@ public class ProgammeParser {
 
         return new Exercise(sets, reps, weight, name);
     }
+
 
     private Command prepareViewCommand(String argumentString) {
         int progIndex = parseIndex(argumentString);

@@ -3,8 +3,8 @@ package programme;
 import java.util.ArrayList;
 
 public class Programme {
-    private String programmeName;
-    private ArrayList<Day> dayList;
+    private final String programmeName;
+    private final ArrayList<Day> dayList;
 
     public Programme(String programmeName, ArrayList<Day> dayList) {
         this.programmeName = programmeName;
@@ -15,16 +15,17 @@ public class Programme {
         return dayList.get(index);
     }
 
-    public void insertDay(String dayName, ArrayList<Exercise> exercises) {
-        Day day = new Day(dayName, exercises);
+    public void insertDay(Day day) {
         dayList.add(day);
     }
 
-    public void deleteDay(int index){
+    public Day deleteDay(int index){
         if (dayList.size() < index){
             System.out.println("invalid index");
         }
-        dayList.remove(index - 1);
+        Day toBeDeleted = dayList.get(index);
+        dayList.remove(index);
+        return toBeDeleted;
     }
 
     @Override

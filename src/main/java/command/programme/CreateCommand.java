@@ -11,8 +11,8 @@ import core.History;
 
 public class CreateCommand extends Command {
     public static final String COMMAND_WORD = "create";
-    private String name;
-    private ArrayList<Day> contents;
+    private final String name;
+    private final ArrayList<Day> contents;
 
     public CreateCommand(String name, ArrayList<Day> contents) {
         this.name = name;

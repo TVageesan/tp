@@ -1,14 +1,14 @@
-package command.programme.exercise;
+package command.programme.edit;
 
 
 import programme.Day;
 import programme.Exercise;
 import programme.ProgrammeList;
 
-public class EditExerciseCommand  extends ExerciseCommand {
+public class EditExerciseCommand  extends EditSubCommand {
 
-    private int exerciseId;
-    private Exercise update;
+    private final int exerciseId;
+    private final Exercise update;
 
     public EditExerciseCommand(int progId, int dayId, int exerciseId, Exercise update) {
         super(progId,dayId);

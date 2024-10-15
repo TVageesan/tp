@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 public class ProgrammeList {
 
     int currentActiveProgramme;
-    private ArrayList<Programme> programmeList;
+    private final ArrayList<Programme> programmeList;
 
     public ProgrammeList() {
         programmeList = new ArrayList<>();
@@ -43,6 +43,14 @@ public class ProgrammeList {
         }
         Programme progContent = programmeList.get(progIndex);
         return progContent.getDay(dayIndex);
+    }
+
+    public Day deleteDay(int progIndex, int dayIndex) {
+        return programmeList.get(progIndex).deleteDay(dayIndex);
+    }
+
+    public void insertDay(int progIndex, Day day){
+        programmeList.get(progIndex).insertDay(day);
     }
 
     @Override
