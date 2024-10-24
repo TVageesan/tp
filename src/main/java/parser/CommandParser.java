@@ -7,13 +7,11 @@ import command.LogCommand;
 import command.InvalidCommand;
 import command.WeeklySummaryCommand;
 import command.PersonalBestCommand;
+import parser.modules.ProgCommandParser;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-
-import static parser.ParserUtils.parseIndex;
-import static parser.ParserUtils.parseDate;
 
 public class CommandParser {
     private final ProgCommandParser progParser;
@@ -21,10 +19,6 @@ public class CommandParser {
 
     public CommandParser() {
         this.progParser = new ProgCommandParser();
-    }
-
-    public CommandParser(ProgCommandParser progParser) {
-        this.progParser = progParser;
     }
 
     public Command parse(String fullCommand) {
@@ -45,7 +39,7 @@ public class CommandParser {
                 new Object[]{commandString, argumentString});
 
         return switch (commandString) {
-        case ProgCommandParser.COMMAND_WORD -> progParser.parse(argumentString);
+        case ProgCommandParser.MODULE_WORD -> progParser.parse(argumentString);
         case LogCommand.COMMAND_WORD -> prepareLogCommand(argumentString);
         case HistoryCommand.COMMAND_WORD -> new HistoryCommand();
         case WeeklySummaryCommand.COMMAND_WORD -> new WeeklySummaryCommand();
@@ -68,19 +62,9 @@ public class CommandParser {
 
         FlagParser flagParser = new FlagParser(argumentString);
 
-        int progIndex = -1;
-        int dayIndex = -1;
-        LocalDate date = LocalDate.now();
-
-        if (flagParser.hasFlag("/p")) {
-            progIndex = parseIndex(flagParser.getFlagValue("/p"), "Invalid programme index.");
-        }
-        if (flagParser.hasFlag("/d")) {
-            dayIndex = parseIndex(flagParser.getFlagValue("/d"), "Invalid day index.");
-        }
-        if (flagParser.hasFlag("/t")) {
-            date = parseDate(flagParser.getFlagValue("/t"));
-        }
+        int progIndex = flagParser.getIndexByFlag("/p");
+        int dayIndex = flagParser.getIndexByFlag("/d");
+        LocalDate date = flagParser.getDateByFlag("/t");
 
         logger.log(Level.INFO, "LogCommand prepared with Programme index: {0}, Day index: {1}, Date: {2}",
                 new Object[]{progIndex, dayIndex, date});

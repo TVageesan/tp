@@ -12,7 +12,6 @@ public class FlagParser {
     private final Map<String, String> parsedFlags = new HashMap<>();
     private final Map<String, String> aliasMap = new HashMap<>();
 
-
     public FlagParser(String argumentString) {
         initializeAliasMap();
         if (argumentString != null && !argumentString.trim().isEmpty()) {
@@ -21,7 +20,6 @@ public class FlagParser {
     }
 
     private void initializeAliasMap() {
-        aliasMap.put("/p", "/p");
         aliasMap.put("/progIndex", "/p");
         aliasMap.put("/programme", "/p");
 

@@ -97,7 +97,7 @@ public class ProgrammeList {
         return deletedDay;
     }
 
-    public void insertDay(int progIndex, Day day){
+    public void insertDay(int progIndex, Day day) {
         if (progIndex < 0 || progIndex >= programmeList.size()) {
             logger.log(Level.WARNING, "Invalid programme index: {0} for insertDay()", progIndex);
             throw new IndexOutOfBoundsException("Programme index " + progIndex + " is out of bounds.");
